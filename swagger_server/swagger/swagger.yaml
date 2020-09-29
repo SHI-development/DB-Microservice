@@ -1,0 +1,481 @@
+---
+swagger: "2.0"
+info:
+  description: "SHI backend server description."
+  version: "0.0.1"
+  title: "SHI Backend Server"
+  contact:
+    email: "sam@shi.health.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+tags:
+- name: "user"
+  description: "User Data APIs"
+- name: "yogi"
+  description: "Yogi Data APIs"
+- name: "expert"
+  description: "Knowledge Builder Personnel APIs"
+schemes:
+- "https"
+paths:
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: "Create user"
+      operationId: "create_user"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Create user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "successful operation"
+      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+  /enhancedUser/{clientId}:
+    post:
+      tags:
+      - "user"
+      summary: "Add an enhanced user"
+      operationId: "create_enhanced_user"
+      consumes:
+      - "multipart/form-data"
+      parameters:
+      - name: "clientId"
+        in: "path"
+        description: "Client ID of enhanced user"
+        required: true
+        type: "string"
+      - name: "firstName"
+        in: "formData"
+        description: "First name of enhanced user"
+        required: true
+        type: "string"
+      - name: "lastName"
+        in: "formData"
+        description: "Last name of enhanced user"
+        required: true
+        type: "string"
+      - name: "email"
+        in: "formData"
+        description: "Email of enhanced user"
+        required: true
+        type: "string"
+      - name: "address"
+        in: "formData"
+        description: "The physical address of the enhanced user"
+        required: false
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid User ID supplied"
+        "404":
+          description: "User not found"
+      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+  /user/{userId}:
+    get:
+      tags:
+      - "user"
+      summary: "Get user by user ID"
+      description: "Get user anonymous info by ID"
+      operationId: "get_user_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Invalid User ID supplied"
+        "404":
+          description: "User not found"
+      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+    put:
+      tags:
+      - "user"
+      summary: "Update a user by user ID"
+      description: "Send Ananymous user data by user ID"
+      operationId: "update_user"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid user ID supplied"
+        "404":
+          description: "User not found"
+      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+    delete:
+      tags:
+      - "user"
+      summary: "Delete user"
+      operationId: "delete_user"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid User ID supplied"
+        "404":
+          description: "User not found"
+      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+  /yogi:
+    post:
+      tags:
+      - "yogi"
+      summary: "Create yogi"
+      operationId: "create_yogi"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Create Yogi object"
+        required: true
+        schema:
+          $ref: "#/definitions/Yogi"
+      responses:
+        "200":
+          description: "successful operation"
+      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+  /suggest/{userId}:
+    get:
+      tags:
+      - "yogi"
+      summary: "Suggest a yogi based on user characteristics"
+      operationId: "suggest_yogi"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Yogi"
+        "400":
+          description: "Invalid User ID supplied"
+        "500":
+          description: "Could not find Yogi"
+          schema:
+            $ref: "#/definitions/ServerError"
+      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+  /yogi/{yogiId}:
+    get:
+      tags:
+      - "yogi"
+      summary: "Get yogi by yogi ID"
+      description: "Get user anonymous info by ID"
+      operationId: "get_yogi_by_id"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "yogiId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Yogi"
+        "400":
+          description: "Invalid Yogi ID supplied"
+        "404":
+          description: "Yogi not found"
+      deprecated: true
+      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+    put:
+      tags:
+      - "yogi"
+      summary: "Update a yogi"
+      operationId: "update_yogi"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "yogiId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Yogi"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid yogi ID supplied"
+        "404":
+          description: "Yogi not found"
+      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+    delete:
+      tags:
+      - "yogi"
+      summary: "Delete yogi"
+      operationId: "delete_yogi"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "yogiId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid Yogi ID supplied"
+        "404":
+          description: "Yogi not found"
+      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+  /expert:
+    post:
+      tags:
+      - "expert"
+      summary: "Create an expert"
+      operationId: "create_expert"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Create Expert object"
+        required: true
+        schema:
+          $ref: "#/definitions/Expert"
+      responses:
+        "200":
+          description: "successful operation"
+      x-swagger-router-controller: "swagger_server.controllers.expert_controller"
+definitions:
+  Geolocation:
+    type: "object"
+    properties:
+      lat:
+        type: "number"
+        format: "double"
+      lon:
+        type: "number"
+        format: "double"
+      timestamp:
+        type: "string"
+        format: "date-time"
+    example:
+      lon: 5.63737665663332876420099637471139430999755859375
+      lat: 5.962133916683182377482808078639209270477294921875
+      timestamp: "2000-01-23T04:56:07.000+00:00"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "udid"
+      vatta:
+        type: "number"
+        format: "float"
+      pitta:
+        type: "number"
+        format: "float"
+      kapha:
+        type: "number"
+        format: "float"
+      pub_key:
+        type: "string"
+        format: "udid"
+      tasksCompleted:
+        type: "array"
+        description: "All the tasks that were completed by the user"
+        items:
+          type: "string"
+      geoLocations:
+        type: "array"
+        description: "The array of geolocations registered by the user"
+        items:
+          $ref: "#/definitions/Geolocation"
+      orders:
+        type: "array"
+        description: "The array of udids of purchases with vendors"
+        items:
+          type: "string"
+          format: "udid"
+    example:
+      kapha: 1.4658129
+      pitta: 6.0274563
+      tasksCompleted:
+      - "tasksCompleted"
+      - "tasksCompleted"
+      vatta: 0.8008282
+      orders:
+      - "orders"
+      - "orders"
+      id: "id"
+      pub_key: "pub_key"
+      geoLocations:
+      - lon: 5.63737665663332876420099637471139430999755859375
+        lat: 5.962133916683182377482808078639209270477294921875
+        timestamp: "2000-01-23T04:56:07.000+00:00"
+      - lon: 5.63737665663332876420099637471139430999755859375
+        lat: 5.962133916683182377482808078639209270477294921875
+        timestamp: "2000-01-23T04:56:07.000+00:00"
+  EnhancedUser:
+    type: "object"
+    properties:
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      clientId:
+        type: "string"
+        format: "udid"
+      address:
+        type: "string"
+      user:
+        $ref: "#/definitions/User"
+  Expert:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "udid"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      clientId:
+        type: "string"
+        format: "udid"
+      geolocation:
+        $ref: "#/definitions/Expert_geolocation"
+      authored:
+        type: "array"
+        description: "All the nodes authored by this expert."
+        items:
+          type: "string"
+          format: "udid"
+      category:
+        $ref: "#/definitions/User"
+    xml:
+      name: "Expert"
+  Yogi:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "udid"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      email:
+        type: "string"
+      clientId:
+        type: "string"
+        format: "udid"
+      geolocation:
+        $ref: "#/definitions/Yogi_geolocation"
+      category:
+        $ref: "#/definitions/User"
+    xml:
+      name: "Yogi"
+    example:
+      firstName: "firstName"
+      lastName: "lastName"
+      clientId: "clientId"
+      id: "id"
+      category:
+        kapha: 1.4658129
+        pitta: 6.0274563
+        tasksCompleted:
+        - "tasksCompleted"
+        - "tasksCompleted"
+        vatta: 0.8008282
+        orders:
+        - "orders"
+        - "orders"
+        id: "id"
+        pub_key: "pub_key"
+        geoLocations:
+        - lon: 5.63737665663332876420099637471139430999755859375
+          lat: 5.962133916683182377482808078639209270477294921875
+          timestamp: "2000-01-23T04:56:07.000+00:00"
+        - lon: 5.63737665663332876420099637471139430999755859375
+          lat: 5.962133916683182377482808078639209270477294921875
+          timestamp: "2000-01-23T04:56:07.000+00:00"
+      email: "email"
+      geolocation:
+        lon: 6.02745618307040320615897144307382404804229736328125
+        lat: 0.80082819046101150206595775671303272247314453125
+  ServerError:
+    type: "object"
+    required:
+    - "errorCode"
+    - "message"
+    properties:
+      errorCode:
+        type: "integer"
+      message:
+        type: "string"
+    description: "There was an error server side"
+  Expert_geolocation:
+    type: "object"
+    properties:
+      lat:
+        type: "number"
+        format: "double"
+      lon:
+        type: "number"
+        format: "double"
+    description: "The geolocation of the Expert"
+  Yogi_geolocation:
+    type: "object"
+    properties:
+      lat:
+        type: "number"
+        format: "double"
+      lon:
+        type: "number"
+        format: "double"
+    description: "The geolocation of the Yogi"
+    example:
+      lon: 6.02745618307040320615897144307382404804229736328125
+      lat: 0.80082819046101150206595775671303272247314453125
