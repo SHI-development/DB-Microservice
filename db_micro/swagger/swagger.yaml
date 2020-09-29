@@ -37,7 +37,7 @@ paths:
       responses:
         "200":
           description: "successful operation"
-      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+      x-swagger-router-controller: "db_micro.controllers.user_controller"
   /enhancedUser/{clientId}:
     post:
       tags:
@@ -79,7 +79,7 @@ paths:
           description: "Invalid User ID supplied"
         "404":
           description: "User not found"
-      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+      x-swagger-router-controller: "db_micro.controllers.user_controller"
   /user/{userId}:
     get:
       tags:
@@ -103,7 +103,7 @@ paths:
           description: "Invalid User ID supplied"
         "404":
           description: "User not found"
-      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+      x-swagger-router-controller: "db_micro.controllers.user_controller"
     put:
       tags:
       - "user"
@@ -129,7 +129,7 @@ paths:
           description: "Invalid user ID supplied"
         "404":
           description: "User not found"
-      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+      x-swagger-router-controller: "db_micro.controllers.user_controller"
     delete:
       tags:
       - "user"
@@ -149,7 +149,7 @@ paths:
           description: "Invalid User ID supplied"
         "404":
           description: "User not found"
-      x-swagger-router-controller: "swagger_server.controllers.user_controller"
+      x-swagger-router-controller: "db_micro.controllers.user_controller"
   /yogi:
     post:
       tags:
@@ -168,7 +168,7 @@ paths:
       responses:
         "200":
           description: "successful operation"
-      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+      x-swagger-router-controller: "db_micro.controllers.yogi_controller"
   /suggest/{userId}:
     get:
       tags:
@@ -193,7 +193,7 @@ paths:
           description: "Could not find Yogi"
           schema:
             $ref: "#/definitions/ServerError"
-      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+      x-swagger-router-controller: "db_micro.controllers.yogi_controller"
   /yogi/{yogiId}:
     get:
       tags:
@@ -218,7 +218,7 @@ paths:
         "404":
           description: "Yogi not found"
       deprecated: true
-      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+      x-swagger-router-controller: "db_micro.controllers.yogi_controller"
     put:
       tags:
       - "yogi"
@@ -243,7 +243,7 @@ paths:
           description: "Invalid yogi ID supplied"
         "404":
           description: "Yogi not found"
-      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+      x-swagger-router-controller: "db_micro.controllers.yogi_controller"
     delete:
       tags:
       - "yogi"
@@ -263,7 +263,7 @@ paths:
           description: "Invalid Yogi ID supplied"
         "404":
           description: "Yogi not found"
-      x-swagger-router-controller: "swagger_server.controllers.yogi_controller"
+      x-swagger-router-controller: "db_micro.controllers.yogi_controller"
   /expert:
     post:
       tags:
@@ -282,7 +282,7 @@ paths:
       responses:
         "200":
           description: "successful operation"
-      x-swagger-router-controller: "swagger_server.controllers.expert_controller"
+      x-swagger-router-controller: "db_micro.controllers.expert_controller"
 definitions:
   Geolocation:
     type: "object"

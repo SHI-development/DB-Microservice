@@ -1,9 +1,9 @@
 import connexion
 import six
 
-from swagger_server.models.server_error import ServerError  # noqa: E501
-from swagger_server.models.yogi import Yogi  # noqa: E501
-from swagger_server import util
+from db_micro.models.server_error import ServerError  # noqa: E501
+from db_micro.models.yogi import Yogi  # noqa: E501
+from db_micro import util
 
 
 def create_yogi(body):  # noqa: E501

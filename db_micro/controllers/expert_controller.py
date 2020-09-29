@@ -1,8 +1,8 @@
 import connexion
 import six
 
-from swagger_server.models.expert import Expert  # noqa: E501
-from swagger_server import util
+from db_micro.models.expert import Expert  # noqa: E501
+from db_micro import util
 
 
 def create_expert(body):  # noqa: E501

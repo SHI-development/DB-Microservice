@@ -5,8 +5,8 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.expert import Expert  # noqa: E501
-from swagger_server.test import BaseTestCase
+from db_micro.models.expert import Expert  # noqa: E501
+from db_micro.test import BaseTestCase
 
 
 class TestExpertController(BaseTestCase):

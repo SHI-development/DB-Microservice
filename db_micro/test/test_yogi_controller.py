@@ -5,9 +5,9 @@ from __future__ import absolute_import
 from flask import json
 from six import BytesIO
 
-from swagger_server.models.server_error import ServerError  # noqa: E501
-from swagger_server.models.yogi import Yogi  # noqa: E501
-from swagger_server.test import BaseTestCase
+from db_micro.models.server_error import ServerError  # noqa: E501
+from db_micro.models.yogi import Yogi  # noqa: E501
+from db_micro.test import BaseTestCase
 
 
 class TestYogiController(BaseTestCase):

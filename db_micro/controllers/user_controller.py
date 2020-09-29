@@ -1,8 +1,8 @@
 import connexion
 import six
 
-from swagger_server.models.user import User  # noqa: E501
-from swagger_server import util
+from db_micro.models.user import User  # noqa: E501
+from db_micro import util
 
 
 def create_enhanced_user(clientId, firstName, lastName, email, address=None):  # noqa: E501
