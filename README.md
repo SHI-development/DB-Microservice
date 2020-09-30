@@ -7,7 +7,7 @@ This server uses the [Connexion](https://github.com/zalando/connexion) library o
 ## Run DB
 
 ```
-mongod --config C:\mongodb\conf\mongodb.conf
+mongod --config mongodb.conf
 ```
 
 Run this from `mongodb.conf` in order to set up the mongo server. 
